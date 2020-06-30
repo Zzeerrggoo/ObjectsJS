@@ -1,87 +1,78 @@
 'use strict';
 
 const a = fillArrayWithRandom(10, 10, 1);
+const b = fillArrayWithRandom(5, 10, 1);
 
+alert(`First array : ${a}\nSecond array: ${b}`);
 
-alertArr(a);
-alertArrEven(a);
-alert(sumOfArrElements(a));
-alert(getMaxArrElement(a));
-
-addByIndex(a,0,100);
-alert(a);
-
-deleteByIndex(a, 0);
-alert(a);
-
-
+alert(union(a,b));
+alert(intersection(a,b));
+alert(difference(a,b));
 
 /**
- * Implements adding an element to an array by index
- * @param {[]}     arr
- * @param {number} index
- * @param {number} value
+ * Implements difference of sets
+ * @param   {[]} arr1
+ * @param   {[]} arr2
+ * @returns {[]}
  */
-function addByIndex(arr, index, value) {
-  arr[index] = value;
+function difference(arr1, arr2) {
+
+  const res = [];
+
+  for (let i = 0; i < arr1.length; ++i) {
+    if (!arr2.includes(arr1[i])) {
+      res.push(arr1[i]);
+    }
+  }
+
+  return res;
+
 }
 
 /**
- * Implements deleting an element from the array by index
- * using splice()
- *
- * @param {[]}     arr
- * @param {number} index
+ * Implements intersection of sets
+ * @param   {[]} arr1
+ * @param   {[]} arr2
+ * @returns {[]}
  */
-function deleteByIndex(arr, index) {
-  arr.splice(index, 1);
+function intersection(arr1, arr2) {
+
+  if (arr1.length > arr2.length) {
+    [arr1, arr2] = [arr2, arr1];
+  }
+
+  const res = [];
+
+  for (let i = 0; i < arr1.length; ++i) {
+    if (arr2.includes(arr1[i])) {
+      res.push(arr1[i]);
+    }
+  }
+
+  return res;
+
 }
 
 /**
- * Implements Math.max for searching max element of an array
- * @param   {[]}     arr
- * @returns {number}
+ * Implements union of sets
+ * @param   {[]} arr1
+ * @param   {[]} arr2
+ * @returns {[]}
  */
-function getMaxArrElement(arr) {
-  return Math.max.apply(Math, arr);
+function union(arr1, arr2) {
+
+  const concatArr = arr1.concat(arr2);
+  const res = [];
+
+  for (let i = 0; i < concatArr.length; ++i) {
+    if (!res.includes(concatArr[i])) {
+      res.push(concatArr[i]);
+    }
+  }
+
+  return res;
 }
 
-/**
- * Counts sum of all array elements
- * @param   {[]}     arr
- * @returns {number}
- */
-function sumOfArrElements(arr) {
-  return arr.reduce(function(accumulator, current) {
-    return accumulator + current;
-  });
-}
-
-/**
- * Just using alert in function
- * @param arr
- */
-function alertArr(arr) {
-  alert(arr);
-}
-
-/**
- * Specifies whether a num is even
- * @param   {number}  num
- * @returns {boolean}
- */
-function isEven(num) {
-  return num % 2 === 0;
-}
-
-/**
- * Alerts only even array elements
- * @param {[]} arr
- */
-function alertArrEven(arr) {
-  const evenElements = arr.filter(isEven);
-  alert(evenElements);
-}
 
 /**
  * Returns array filled with random numbers
