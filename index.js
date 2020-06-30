@@ -3,6 +3,7 @@
 const a = fillArrayWithRandom(10, 10, 1);
 const b = fillArrayWithRandom(5, 10, 1);
 
+
 alert(`First array : ${a}\nSecond array: ${b}`);
 
 alert(union(a,b));
@@ -44,7 +45,7 @@ function intersection(arr1, arr2) {
   const res = [];
 
   for (let i = 0; i < arr1.length; ++i) {
-    if (arr2.includes(arr1[i])) {
+    if (arr2.includes(arr1[i]) && !res.includes(arr1[i])) {
       res.push(arr1[i]);
     }
   }
